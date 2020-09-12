@@ -1,6 +1,6 @@
 import { Transport } from "@nestjs/microservices";
 
-export const authMicroserviceOptions = {
+export const mailMicroserviceOptions = {
     transport: Transport.RMQ,
     options: {
       urls: [
