@@ -1,4 +1,3 @@
-import { SignInHandler } from "./sign-in.handler";
-import { SignUpHandler } from "./sign-up.handler";
+import { LogConfirmationEmailHandler } from "./log-confirmation-email.handler";
 
-export const CommandHandlers = [SignInHandler, SignUpHandler];
+export const CommandHandlers = [LogConfirmationEmailHandler];

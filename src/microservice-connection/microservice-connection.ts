@@ -6,7 +6,7 @@ export const mailMicroserviceOptions = {
       urls: [
         `amqp://${process.env.RABBITMQ_DEFAULT_USER}:${process.env.RABBITMQ_DEFAULT_PASS}@localhost:${process.env.RABBITMQ_FIRST_HOST_PORT}/${process.env.RABBITMQ_DEFAULT_VHOST}` 
       ],
-      queue: 'auth_queue',
+      queue: 'mail_queue',
       queueOptions: {
         durable: false,
       }

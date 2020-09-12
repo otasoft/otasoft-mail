@@ -1,1 +1,1 @@
-export * from './get-user-id.query'
+export * from './get-customer-emails.query'

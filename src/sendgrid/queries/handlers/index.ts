@@ -1,3 +1,3 @@
-import { GetUserIdHandler } from './get-user-id.handler';
+import { GetCustomerEmailsHandler } from './get-customer-emails.handler'
 
-export const QueryHandlers = [GetUserIdHandler];
+export const QueryHandlers = [GetCustomerEmailsHandler];
