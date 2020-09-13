@@ -1,6 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-// import { CheckConfirmationTokenDto } from './dto/check-confirmation-token.dto';
 import { SendEmailDto } from './dto/send-email.dto';
 import { SendgridService } from './sendgrid.service';
 
@@ -15,9 +14,4 @@ export class SendgridController {
     async sendConfirmationEmail(@Body() sendEmailDto: SendEmailDto) {
         return await this.sendgridService.sendConfirmationEmail(sendEmailDto)
     }
-
-    // @MessagePattern({ role: 'mail', cmd: 'check', type: 'confirmation' })
-    // async checkConfirmationToken(@Body() checkConfirmationTokenDto: CheckConfirmationTokenDto) {
-    //     return this.sendgridService.checkConfirmationToken(checkConfirmationTokenDto);
-    // }
 }

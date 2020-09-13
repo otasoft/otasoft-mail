@@ -23,11 +23,8 @@ export class SendgridService {
             from: 'noreply@otasoft.org',
             subject: emailTemplates.confirmCreateAccount.subject,
             text: emailTemplates.confirmCreateAccount.text,
-            html: `<a href="${this.configService.get('SERVER_URL')}/sengrid/confirm/${confirmation_token}">Click me to confirm</a>`,
+            html: `<a href="${this.configService.get('SERVER_URL')}/local-auth/confirm/${confirmation_token}">Click me to confirm</a>`,
           };
-
-          console.log(message)
-          console.log(sendgrid)
 
           try {
             await sendgrid.send(message)
