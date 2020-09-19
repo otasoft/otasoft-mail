@@ -1,17 +1,25 @@
-FROM node:12-alpine as build
+FROM node:12-alpine as dev
 
-WORKDIR /usr/share/otasoft-mail
+WORKDIR /usr/share/microservices/otasoft-mail
 
-ADD dist package.json ./
+COPY package.json ./
 
-RUN yarn install --production
+RUN yarn install
 
-FROM node:12-alpine
+COPY . .
 
-WORKDIR /usr/share/otasoft-mail
+RUN yarn run build
 
-COPY --from=build /usr/share/otasoft-mail .
+# ADD dist package.json ./
 
-EXPOSE 60231
+# RUN yarn install --production
 
-CMD ["node", "main.js"]
+# FROM node:12-alpine
+
+# WORKDIR /usr/share/microservices/otasoft-mail
+
+# COPY --from=build /usr/share/microservices/otasoft-mail/dist ./dist
+
+# EXPOSE 60234
+
+# CMD ["node", "dist/main"]
