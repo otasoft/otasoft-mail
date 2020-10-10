@@ -1,1 +1,1 @@
-export * from './log-confirmation-email.command'
+export * from './log-confirmation-email.command';

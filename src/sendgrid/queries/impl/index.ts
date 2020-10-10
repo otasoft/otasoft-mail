@@ -1,1 +1,1 @@
-export * from './get-customer-emails.query'
+export * from './get-customer-emails.query';

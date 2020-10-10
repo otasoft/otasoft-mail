@@ -5,22 +5,24 @@ import { SendgridEmailRepository } from 'src/sendgrid/repositories/sendgrid-emai
 import { SendgridEmailEntity } from 'src/sendgrid/repositories/sendgrid-email.entity';
 import { GetCustomerEmailsQuery } from '../impl';
 
-
 @QueryHandler(GetCustomerEmailsQuery)
-export class GetCustomerEmailsHandler implements IQueryHandler<GetCustomerEmailsQuery>{
-    constructor(
-        @InjectRepository(SendgridEmailRepository)
-        private readonly sendgridEmailRepository: SendgridEmailRepository
-        ) {}
+export class GetCustomerEmailsHandler
+  implements IQueryHandler<GetCustomerEmailsQuery> {
+  constructor(
+    @InjectRepository(SendgridEmailRepository)
+    private readonly sendgridEmailRepository: SendgridEmailRepository,
+  ) {}
 
-    async execute(query: GetCustomerEmailsQuery) {
-        const { customer_email } = query.sendEmailDto
-        const customerEmails: SendgridEmailEntity[] = await this.sendgridEmailRepository.find({ where: { customer_email: customer_email } })
+  async execute(query: GetCustomerEmailsQuery) {
+    const { customer_email } = query.sendEmailDto;
+    const customerEmails: SendgridEmailEntity[] = await this.sendgridEmailRepository.find(
+      { where: { customer_email: customer_email } },
+    );
 
-        if (!customerEmails) {
-            throw new RpcException('User has no mail history')
-        }
-
-        return customerEmails;
+    if (!customerEmails) {
+      throw new RpcException('User has no mail history');
     }
+
+    return customerEmails;
+  }
 }

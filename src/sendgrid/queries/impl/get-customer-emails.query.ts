@@ -1,7 +1,5 @@
-import { SendEmailDto } from "src/sendgrid/dto/send-email.dto";
+import { SendEmailDto } from 'src/sendgrid/dto/send-email.dto';
 
 export class GetCustomerEmailsQuery {
-    constructor(
-        public readonly sendEmailDto: SendEmailDto,
-    ) {}
+  constructor(public readonly sendEmailDto: SendEmailDto) {}
 }
