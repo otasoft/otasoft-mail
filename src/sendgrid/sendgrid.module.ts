@@ -11,10 +11,7 @@ import { SendgridService } from './sendgrid.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      SendgridEmailRepository,
-      SendgridEmailEntity
-    ]),
+    TypeOrmModule.forFeature([SendgridEmailRepository, SendgridEmailEntity]),
     CqrsModule,
   ],
   controllers: [SendgridController],
@@ -22,7 +19,7 @@ import { SendgridService } from './sendgrid.service';
     SendgridService,
     ConfigService,
     ...QueryHandlers,
-    ...CommandHandlers
-  ]
+    ...CommandHandlers,
+  ],
 })
 export class SendgridModule {}

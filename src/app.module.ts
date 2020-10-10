@@ -4,10 +4,6 @@ import { DbModule } from './db/db.module';
 import { SendgridModule } from './sendgrid/sendgrid.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    DbModule,
-    SendgridModule,
-  ],
+  imports: [ConfigModule.forRoot(), DbModule, SendgridModule],
 })
 export class AppModule {}

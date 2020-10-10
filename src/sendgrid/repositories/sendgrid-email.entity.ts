@@ -1,19 +1,19 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class SendgridEmailEntity extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    email_type: string;
+  @Column()
+  email_type: string;
 
-    @Column()
-    customer_email: string;
+  @Column()
+  customer_email: string;
 
-    @Column()
-    subject: string;
+  @Column()
+  subject: string;
 
-    @Column()
-    text: string;
+  @Column()
+  text: string;
 }
