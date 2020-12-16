@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { SendgridEmailRepository } from 'src/sendgrid/repositories/sendgrid-email.repository';
+import { SendgridEmailRepository } from 'src/db/repositories/sendgrid-email.repository';
 import { LogConfirmationEmailCommand } from '../impl';
 
 @CommandHandler(LogConfirmationEmailCommand)

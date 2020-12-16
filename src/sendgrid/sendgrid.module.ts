@@ -4,7 +4,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommandHandlers } from './commands/handlers';
 import { QueryHandlers } from './queries/handlers';
-import { SendgridEmailRepository } from './repositories/sendgrid-email.repository';
+import { SendgridEmailRepository } from '../db/repositories/sendgrid-email.repository';
 import { SendgridController } from './sendgrid.controller';
 import { SendgridService } from './sendgrid.service';
 

@@ -2,7 +2,7 @@ import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
 import { RpcException } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { SendgridEmailRepository } from '../../repositories/sendgrid-email.repository';
+import { SendgridEmailRepository } from '../../../db/repositories/sendgrid-email.repository';
 import { EmailEntity } from '../../../db/entities/email.entity';
 import { GetCustomerEmailsQuery } from '../impl';
 
