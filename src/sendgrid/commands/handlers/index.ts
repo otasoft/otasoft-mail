@@ -1,3 +1,3 @@
-import { LogConfirmationEmailHandler } from './log-confirmation-email.handler';
+import { LogEmailToDbHandler } from './log-email-to-db.handler';
 
-export const CommandHandlers = [LogConfirmationEmailHandler];
+export const CommandHandlers = [LogEmailToDbHandler];
