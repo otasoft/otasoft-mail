@@ -14,7 +14,7 @@ export class LogEmailToDbHandler
   ) {}
 
   async execute(command: LogEmailToDbCommand) {
-    const { customer_email, email_type, subject, text } = command.confirmAccountEmail;
+    const { customer_email, email_type, subject, text } = command.emailObject;
 
     const email = this.emailRepository.create();
     email.customer_email = customer_email;
