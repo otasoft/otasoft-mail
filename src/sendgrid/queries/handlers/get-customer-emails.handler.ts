@@ -2,7 +2,7 @@ import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
 import { RpcException } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { SendgridEmailRepository } from '../../../db/repositories/sendgrid-email.repository';
+import { EmailRepository } from '../../../db/repositories/email.repository';
 import { EmailEntity } from '../../../db/entities/email.entity';
 import { GetCustomerEmailsQuery } from '../impl';
 
@@ -10,13 +10,13 @@ import { GetCustomerEmailsQuery } from '../impl';
 export class GetCustomerEmailsHandler
   implements IQueryHandler<GetCustomerEmailsQuery> {
   constructor(
-    @InjectRepository(SendgridEmailRepository)
-    private readonly sendgridEmailRepository: SendgridEmailRepository,
+    @InjectRepository(EmailRepository)
+    private readonly emailRepository: EmailRepository,
   ) {}
 
   async execute(query: GetCustomerEmailsQuery) {
     const { customer_email } = query.sendEmailDto;
-    const customerEmails: EmailEntity[] = await this.sendgridEmailRepository.find(
+    const customerEmails: EmailEntity[] = await this.emailRepository.find(
       { where: { customer_email: customer_email } },
     );
 

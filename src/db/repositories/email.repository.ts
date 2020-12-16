@@ -6,7 +6,7 @@ import { SendEmailDto } from '../../sendgrid/dto/send-email.dto';
 import { emailTemplates } from '../../templates/email-templates';
 
 @EntityRepository(EmailEntity)
-export class SendgridEmailRepository extends Repository<EmailEntity> {
+export class EmailRepository extends Repository<EmailEntity> {
   async logConfirmationEmail(sendEmailDto: SendEmailDto): Promise<void> {
     const { customer_email, email_type } = sendEmailDto;
 
