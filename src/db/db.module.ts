@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { SendgridEmailEntity } from './entities/sendgrid-email.entity';
+
+import { EmailEntity } from './entities/email.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { SendgridEmailEntity } from './entities/sendgrid-email.entity';
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DATABASE'),
         synchronize: true,
-        entities: [SendgridEmailEntity]
+        entities: [EmailEntity]
       }),
     }),
   ],
