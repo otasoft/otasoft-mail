@@ -1,6 +1,9 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EmailRepository } from 'src/db/repositories/email.repository';
+import { RpcException } from '@nestjs/microservices';
+
+import { emailTemplates } from '../../../templates/email-templates';
+import { EmailRepository } from '../../../db/repositories/email.repository';
 import { LogConfirmationEmailCommand } from '../impl';
 
 @CommandHandler(LogConfirmationEmailCommand)
@@ -12,8 +15,18 @@ export class LogConfirmationEmailHandler
   ) {}
 
   async execute(command: LogConfirmationEmailCommand) {
-    return await this.emailRepository.logConfirmationEmail(
-      command.sendEmailDto,
-    );
+    const { customer_email, email_type } = command.sendEmailDto;
+
+    const email = this.emailRepository.create();
+    email.customer_email = customer_email;
+    email.email_type = email_type;
+    email.subject = emailTemplates.confirmCreateAccount.subject;
+    email.text = emailTemplates.confirmCreateAccount.text;
+
+    try {
+      await email.save();
+    } catch (error) {
+      throw new RpcException(error);
+    }
   }
 }
