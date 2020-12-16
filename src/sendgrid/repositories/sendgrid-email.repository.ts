@@ -1,6 +1,6 @@
 import { RpcException } from '@nestjs/microservices';
 import { EntityRepository, Repository } from 'typeorm';
-import { SendgridEmailEntity } from './sendgrid-email.entity';
+import { SendgridEmailEntity } from '../../db/entities/sendgrid-email.entity';
 import { SendEmailDto } from '../dto/send-email.dto';
 import { emailTemplates } from '../../templates/email-templates';
 
