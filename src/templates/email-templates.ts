@@ -7,5 +7,9 @@ export const emailTemplates = {
   resetPassword: {
     subject: 'Remind password to Otasoft account',
     text: 'Dear user, <br> We received your request to reset password. <br> Please click the following link to reset your password',
+  },
+  confirmBooking: {
+    subject: 'Your booking in Otasoft has been confirmed',
+    text: 'Dear user, <br> We received your booking request. <br> Please see attached details.',
   }
 };

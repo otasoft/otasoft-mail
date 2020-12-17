@@ -18,4 +18,9 @@ export class SendgridController {
   async sendResetPasswordEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
     return await this.sendgridService.sendResetPasswordEmail(sendEmailDto);
   }
+
+  @MessagePattern({ role: 'mail', cmd: 'send', type: 'confirm-booking' })
+  async sendConfirmBookingEmail(sendEmailDto: SendEmailDto): Promise <SuccessResponseModel> {
+    return await this.sendgridService.sendConfirmBookingEmail(sendEmailDto);
+  }
 }

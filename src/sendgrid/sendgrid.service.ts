@@ -84,4 +84,37 @@ export class SendgridService {
 
     return { response: 'Reset password sent' }
   }
+
+  async sendConfirmBookingEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+    const { customer_email, email_type } = sendEmailDto;
+    
+    // TODO
+    // In the future, subject and text of this message should be dynamically generated.
+    // It will contain the booking ID, customer data, and so on.
+    const message: ISendgridEmail = {
+      to: customer_email,
+      from: 'noreply@otasoft.org',
+      subject: emailTemplates.confirmBooking.subject,
+      text: emailTemplates.confirmBooking.text,
+    };
+
+    const confirmBookingEmail: IEmailObject = {
+      customer_email,
+      email_type,
+      subject: emailTemplates.confirmBooking.subject,
+      text: emailTemplates.confirmBooking.text
+    };
+
+    try {
+      await sendgrid.send(message).then(() => {
+        this.commandBus.execute(
+          new LogEmailToDbCommand(confirmBookingEmail)
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    return { response: 'Booking confirmation has been sent' }
+  }
 }
