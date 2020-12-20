@@ -19,7 +19,7 @@ export class SendgridService {
     sendgrid.setApiKey(this.configService.get('SENDGRID_KEY'));
   }
 
-  async sendConfirmationEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+  async sendConfirmCreateAccountEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
     const { customer_email, token, email_type } = sendEmailDto;
 
     const message: ISendgridEmail = {

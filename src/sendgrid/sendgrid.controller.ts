@@ -10,8 +10,8 @@ export class SendgridController {
   constructor(private readonly sendgridService: SendgridService) {}
 
   @MessagePattern({ role: 'mail', cmd: 'send', type: 'confirmation' })
-  async sendConfirmationEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
-    return await this.sendgridService.sendConfirmationEmail(sendEmailDto);
+  async sendConfirmCreateAccountEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+    return await this.sendgridService.sendConfirmCreateAccountEmail(sendEmailDto);
   }
 
   @MessagePattern({ role: 'mail', cmd: 'send', type: 'reset-password' })
