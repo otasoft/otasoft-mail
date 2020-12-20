@@ -23,4 +23,9 @@ export class SendgridController {
   async sendConfirmBookingEmail(sendEmailDto: SendEmailDto): Promise <SuccessResponseModel> {
     return await this.sendgridService.sendConfirmBookingEmail(sendEmailDto);
   }
+
+  @MessagePattern({ role: 'mail', cmd: 'send', type: 'delete-account' })
+  async sendDeleteAccountMail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+    return await this.sendgridService.sendDeleteAccountMail(sendEmailDto);
+  }
 }

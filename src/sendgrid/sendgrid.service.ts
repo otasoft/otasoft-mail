@@ -117,4 +117,34 @@ export class SendgridService {
 
     return { response: 'Booking confirmation has been sent' }
   }
+
+  async sendDeleteAccountMail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+    const { customer_email, email_type } = sendEmailDto;
+  
+    const message: ISendgridEmail = {
+      to: customer_email,
+      from: 'noreply@otasoft.org',
+      subject: emailTemplates.deleteAccount.subject,
+      text: emailTemplates.deleteAccount.text,
+    };
+
+    const deleteAccountEmail: IEmailObject = {
+      customer_email,
+      email_type,
+      subject: emailTemplates.deleteAccount.subject,
+      text: emailTemplates.deleteAccount.text
+    };
+
+    try {
+      await sendgrid.send(message).then(() => {
+        this.commandBus.execute(
+          new LogEmailToDbCommand(deleteAccountEmail)
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    return { response: 'Delete account email has been sent' } 
+  }
 }

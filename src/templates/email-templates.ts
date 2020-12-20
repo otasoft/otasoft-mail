@@ -11,5 +11,9 @@ export const emailTemplates = {
   confirmBooking: {
     subject: 'Your booking in Otasoft has been confirmed',
     text: 'Dear user, <br> We received your booking request. <br> Please see attached details.',
+  },
+  deleteAccount: {
+    subject: 'Your has been marked for deletion',
+    text: 'Dear user, <br> We received your request to delete your account. <br> After 30 days from now, your account and all coresponding data will be completely erased from ours system.',
   }
 };
