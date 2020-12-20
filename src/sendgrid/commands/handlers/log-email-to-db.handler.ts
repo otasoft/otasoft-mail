@@ -21,6 +21,7 @@ export class LogEmailToDbHandler
     email.email_type = email_type;
     email.subject = subject;
     email.text = text;
+    email.timestamp = new Date();
 
     try {
       await email.save();

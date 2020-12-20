@@ -16,4 +16,7 @@ export class EmailEntity extends BaseEntity {
 
   @Column()
   text: string;
+
+  @Column()
+  timestamp: Date;
 }
