@@ -1,7 +1,7 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class SendgridEmailEntity extends BaseEntity {
+export class EmailEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -16,4 +16,7 @@ export class SendgridEmailEntity extends BaseEntity {
 
   @Column()
   text: string;
+
+  @Column()
+  timestamp: Date;
 }

@@ -1,23 +1,24 @@
 import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
 import { RpcException } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
-import { SendgridEmailRepository } from 'src/sendgrid/repositories/sendgrid-email.repository';
-import { SendgridEmailEntity } from 'src/sendgrid/repositories/sendgrid-email.entity';
+
+import { EmailRepository } from '../../../db/repositories/email.repository';
+import { EmailEntity } from '../../../db/entities/email.entity';
 import { GetCustomerEmailsQuery } from '../impl';
 
 @QueryHandler(GetCustomerEmailsQuery)
 export class GetCustomerEmailsHandler
   implements IQueryHandler<GetCustomerEmailsQuery> {
   constructor(
-    @InjectRepository(SendgridEmailRepository)
-    private readonly sendgridEmailRepository: SendgridEmailRepository,
+    @InjectRepository(EmailRepository)
+    private readonly emailRepository: EmailRepository,
   ) {}
 
   async execute(query: GetCustomerEmailsQuery) {
     const { customer_email } = query.sendEmailDto;
-    const customerEmails: SendgridEmailEntity[] = await this.sendgridEmailRepository.find(
-      { where: { customer_email: customer_email } },
-    );
+    const customerEmails: EmailEntity[] = await this.emailRepository.find({
+      where: { customer_email: customer_email },
+    });
 
     if (!customerEmails) {
       throw new RpcException('User has no mail history');

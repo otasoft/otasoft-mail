@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+import { EmailEntity } from './entities/email.entity';
+
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -14,8 +16,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get('POSTGRES_USERNAME'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DATABASE'),
-        synchronize: true,
-        autoLoadEntities: true,
+        synchronize: false,
+        entities: [EmailEntity],
+        migrations: ['dist/migrations/*{.ts,.js}'],
+        migrationsTableName: 'migrations_typeorm',
+        migrationsRun: true,
       }),
     }),
   ],
