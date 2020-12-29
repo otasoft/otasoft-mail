@@ -19,7 +19,9 @@ export class SendgridService {
     sendgrid.setApiKey(this.configService.get('SENDGRID_KEY'));
   }
 
-  async sendConfirmCreateAccountEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+  async sendConfirmCreateAccountEmail(
+    sendEmailDto: SendEmailDto,
+  ): Promise<SuccessResponseModel> {
     const { customer_email, token, email_type } = sendEmailDto;
 
     const message: ISendgridEmail = {
@@ -36,14 +38,12 @@ export class SendgridService {
       customer_email,
       email_type,
       subject: emailTemplates.confirmCreateAccount.subject,
-      text: emailTemplates.confirmCreateAccount.text
+      text: emailTemplates.confirmCreateAccount.text,
     };
 
     try {
       await sendgrid.send(message).then(() => {
-        this.commandBus.execute(
-          new LogEmailToDbCommand(confirmAccountEmail),
-        );
+        this.commandBus.execute(new LogEmailToDbCommand(confirmAccountEmail));
       });
     } catch (error) {
       console.log(error);
@@ -51,7 +51,9 @@ export class SendgridService {
     return { response: 'Confirmation sent' };
   }
 
-  async sendResetPasswordEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+  async sendResetPasswordEmail(
+    sendEmailDto: SendEmailDto,
+  ): Promise<SuccessResponseModel> {
     const { customer_email, token, email_type } = sendEmailDto;
 
     const message: ISendgridEmail = {
@@ -64,30 +66,29 @@ export class SendgridService {
       )}/auth/reset/${token}">Click me to reset your password</a>`,
     };
 
-
     const resetPasswordEmail: IEmailObject = {
       customer_email,
       email_type,
       subject: emailTemplates.resetPassword.subject,
-      text: emailTemplates.resetPassword.text
+      text: emailTemplates.resetPassword.text,
     };
 
     try {
       await sendgrid.send(message).then(() => {
-        this.commandBus.execute(
-          new LogEmailToDbCommand(resetPasswordEmail)
-        );
+        this.commandBus.execute(new LogEmailToDbCommand(resetPasswordEmail));
       });
     } catch (error) {
       console.log(error);
     }
 
-    return { response: 'Reset password sent' }
+    return { response: 'Reset password sent' };
   }
 
-  async sendConfirmBookingEmail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+  async sendConfirmBookingEmail(
+    sendEmailDto: SendEmailDto,
+  ): Promise<SuccessResponseModel> {
     const { customer_email, email_type } = sendEmailDto;
-    
+
     // TODO
     // In the future, subject and text of this message should be dynamically generated.
     // It will contain the booking ID, customer data, and so on.
@@ -102,25 +103,25 @@ export class SendgridService {
       customer_email,
       email_type,
       subject: emailTemplates.confirmBooking.subject,
-      text: emailTemplates.confirmBooking.text
+      text: emailTemplates.confirmBooking.text,
     };
 
     try {
       await sendgrid.send(message).then(() => {
-        this.commandBus.execute(
-          new LogEmailToDbCommand(confirmBookingEmail)
-        );
+        this.commandBus.execute(new LogEmailToDbCommand(confirmBookingEmail));
       });
     } catch (error) {
       console.log(error);
     }
 
-    return { response: 'Booking confirmation has been sent' }
+    return { response: 'Booking confirmation has been sent' };
   }
 
-  async sendDeleteAccountMail(sendEmailDto: SendEmailDto): Promise<SuccessResponseModel> {
+  async sendDeleteAccountMail(
+    sendEmailDto: SendEmailDto,
+  ): Promise<SuccessResponseModel> {
     const { customer_email, email_type } = sendEmailDto;
-  
+
     const message: ISendgridEmail = {
       to: customer_email,
       from: 'noreply@otasoft.org',
@@ -132,19 +133,17 @@ export class SendgridService {
       customer_email,
       email_type,
       subject: emailTemplates.deleteAccount.subject,
-      text: emailTemplates.deleteAccount.text
+      text: emailTemplates.deleteAccount.text,
     };
 
     try {
       await sendgrid.send(message).then(() => {
-        this.commandBus.execute(
-          new LogEmailToDbCommand(deleteAccountEmail)
-        );
+        this.commandBus.execute(new LogEmailToDbCommand(deleteAccountEmail));
       });
     } catch (error) {
       console.log(error);
     }
 
-    return { response: 'Delete account email has been sent' } 
+    return { response: 'Delete account email has been sent' };
   }
 }

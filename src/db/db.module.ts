@@ -18,9 +18,9 @@ import { EmailEntity } from './entities/email.entity';
         database: configService.get('POSTGRES_DATABASE'),
         synchronize: false,
         entities: [EmailEntity],
-        migrations: ["dist/migrations/*{.ts,.js}"],
-        migrationsTableName: "migrations_typeorm",
-        migrationsRun: true
+        migrations: ['dist/migrations/*{.ts,.js}'],
+        migrationsTableName: 'migrations_typeorm',
+        migrationsRun: true,
       }),
     }),
   ],

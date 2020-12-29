@@ -16,9 +16,9 @@ export class GetCustomerEmailsHandler
 
   async execute(query: GetCustomerEmailsQuery) {
     const { customer_email } = query.sendEmailDto;
-    const customerEmails: EmailEntity[] = await this.emailRepository.find(
-      { where: { customer_email: customer_email } },
-    );
+    const customerEmails: EmailEntity[] = await this.emailRepository.find({
+      where: { customer_email: customer_email },
+    });
 
     if (!customerEmails) {
       throw new RpcException('User has no mail history');

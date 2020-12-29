@@ -10,10 +10,7 @@ import { SendgridController } from './sendgrid.controller';
 import { SendgridService } from './sendgrid.service';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([EmailRepository]),
-    CqrsModule,
-  ],
+  imports: [TypeOrmModule.forFeature([EmailRepository]), CqrsModule],
   controllers: [SendgridController],
   providers: [
     SendgridService,

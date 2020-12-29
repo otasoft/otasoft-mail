@@ -1,3 +1,3 @@
 export class SuccessResponseModel {
-    response: string;
+  response: string;
 }
