@@ -24,11 +24,13 @@ export class SendgridService {
   ): Promise<SuccessResponseModel> {
     const { customer_email, token, email_type } = sendEmailDto;
 
+    const confirmAccountEmailTemplate = emailTemplates.find(template => template.name === 'confirmCreateAccount')
+
     const message: ISendgridEmail = {
       to: customer_email,
       from: 'noreply@otasoft.org',
-      subject: emailTemplates.confirmCreateAccount.subject,
-      text: emailTemplates.confirmCreateAccount.text,
+      subject: confirmAccountEmailTemplate.subject,
+      text: confirmAccountEmailTemplate.text,
       html: `<a href="${this.configService.get(
         'SERVER_URL',
       )}/local-auth/confirm/${token}">Click me to confirm</a>`,
@@ -37,8 +39,8 @@ export class SendgridService {
     const confirmAccountEmail: IEmailObject = {
       customer_email,
       email_type,
-      subject: emailTemplates.confirmCreateAccount.subject,
-      text: emailTemplates.confirmCreateAccount.text,
+      subject: confirmAccountEmailTemplate.subject,
+      text: confirmAccountEmailTemplate.text,
     };
 
     try {
@@ -56,11 +58,13 @@ export class SendgridService {
   ): Promise<SuccessResponseModel> {
     const { customer_email, token, email_type } = sendEmailDto;
 
+    const resetPasswordEmailTemplate = emailTemplates.find(template => template.name === 'resetPassword')
+
     const message: ISendgridEmail = {
       to: customer_email,
       from: 'noreply@otasoft.org',
-      subject: emailTemplates.resetPassword.subject,
-      text: emailTemplates.resetPassword.text,
+      subject: resetPasswordEmailTemplate.subject,
+      text: resetPasswordEmailTemplate.text,
       html: `<a href="${this.configService.get(
         'SERVER_URL',
       )}/auth/reset/${token}">Click me to reset your password</a>`,
@@ -69,8 +73,8 @@ export class SendgridService {
     const resetPasswordEmail: IEmailObject = {
       customer_email,
       email_type,
-      subject: emailTemplates.resetPassword.subject,
-      text: emailTemplates.resetPassword.text,
+      subject: resetPasswordEmailTemplate.subject,
+      text: resetPasswordEmailTemplate.text,
     };
 
     try {
@@ -89,21 +93,23 @@ export class SendgridService {
   ): Promise<SuccessResponseModel> {
     const { customer_email, email_type } = sendEmailDto;
 
+    const confirmBookingEmailTemplate = emailTemplates.find(template => template.name === 'confirmBooking')
+
     // TODO
     // In the future, subject and text of this message should be dynamically generated.
     // It will contain the booking ID, customer data, and so on.
     const message: ISendgridEmail = {
       to: customer_email,
       from: 'noreply@otasoft.org',
-      subject: emailTemplates.confirmBooking.subject,
-      text: emailTemplates.confirmBooking.text,
+      subject: confirmBookingEmailTemplate.subject,
+      text: confirmBookingEmailTemplate.text,
     };
 
     const confirmBookingEmail: IEmailObject = {
       customer_email,
       email_type,
-      subject: emailTemplates.confirmBooking.subject,
-      text: emailTemplates.confirmBooking.text,
+      subject: confirmBookingEmailTemplate.subject,
+      text: confirmBookingEmailTemplate.text,
     };
 
     try {
@@ -122,18 +128,20 @@ export class SendgridService {
   ): Promise<SuccessResponseModel> {
     const { customer_email, email_type } = sendEmailDto;
 
+    const deleteAccountEmailTemplate = emailTemplates.find(template => template.name === 'deleteAccount')
+
     const message: ISendgridEmail = {
       to: customer_email,
       from: 'noreply@otasoft.org',
-      subject: emailTemplates.deleteAccount.subject,
-      text: emailTemplates.deleteAccount.text,
+      subject: deleteAccountEmailTemplate.subject,
+      text: deleteAccountEmailTemplate.text,
     };
 
     const deleteAccountEmail: IEmailObject = {
       customer_email,
       email_type,
-      subject: emailTemplates.deleteAccount.subject,
-      text: emailTemplates.deleteAccount.text,
+      subject: deleteAccountEmailTemplate.subject,
+      text: deleteAccountEmailTemplate.text,
     };
 
     try {
