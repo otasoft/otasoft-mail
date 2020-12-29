@@ -16,8 +16,11 @@ import { EmailEntity } from './entities/email.entity';
         username: configService.get('POSTGRES_USERNAME'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DATABASE'),
-        synchronize: true,
-        entities: [EmailEntity]
+        synchronize: false,
+        entities: [EmailEntity],
+        migrations: ["dist/migrations/*{.ts,.js}"],
+        migrationsTableName: "migrations_typeorm",
+        migrationsRun: true
       }),
     }),
   ],
