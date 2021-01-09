@@ -22,9 +22,10 @@ export class SendgridService {
   async sendConfirmCreateAccountEmail(
     sendEmailDto: SendEmailDto,
   ): Promise<SuccessResponseModel> {
-    const { customer_email, token, email_type } = sendEmailDto;
+    const { customer_email, token } = sendEmailDto;
+    const email_type = 'confirmCreateAccount';
 
-    const confirmAccountEmailTemplate = emailTemplates.find(template => template.name === 'confirmCreateAccount')
+    const confirmAccountEmailTemplate = emailTemplates.find(template => template.name === email_type);
 
     const message: ISendgridEmail = {
       to: customer_email,
@@ -56,9 +57,10 @@ export class SendgridService {
   async sendResetPasswordEmail(
     sendEmailDto: SendEmailDto,
   ): Promise<SuccessResponseModel> {
-    const { customer_email, token, email_type } = sendEmailDto;
+    const { customer_email, token } = sendEmailDto;
+    const email_type = 'resetPassword';
 
-    const resetPasswordEmailTemplate = emailTemplates.find(template => template.name === 'resetPassword')
+    const resetPasswordEmailTemplate = emailTemplates.find(template => template.name === email_type);
 
     const message: ISendgridEmail = {
       to: customer_email,
@@ -91,9 +93,10 @@ export class SendgridService {
   async sendConfirmBookingEmail(
     sendEmailDto: SendEmailDto,
   ): Promise<SuccessResponseModel> {
-    const { customer_email, email_type } = sendEmailDto;
+    const { customer_email } = sendEmailDto;
+    const email_type = 'confirmBooking';
 
-    const confirmBookingEmailTemplate = emailTemplates.find(template => template.name === 'confirmBooking')
+    const confirmBookingEmailTemplate = emailTemplates.find(template => template.name === email_type)
 
     // TODO
     // In the future, subject and text of this message should be dynamically generated.
@@ -126,9 +129,10 @@ export class SendgridService {
   async sendDeleteAccountMail(
     sendEmailDto: SendEmailDto,
   ): Promise<SuccessResponseModel> {
-    const { customer_email, email_type } = sendEmailDto;
+    const { customer_email } = sendEmailDto;
+    const email_type = 'deleteAccount';
 
-    const deleteAccountEmailTemplate = emailTemplates.find(template => template.name === 'deleteAccount')
+    const deleteAccountEmailTemplate = emailTemplates.find(template => template.name === email_type)
 
     const message: ISendgridEmail = {
       to: customer_email,
