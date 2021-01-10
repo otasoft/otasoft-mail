@@ -54,7 +54,7 @@ export class SendgridService {
     return { response: 'Confirmation sent' };
   }
 
-  async sendResetPasswordEmail(
+  async sendForgotPasswordEmail(
     sendEmailDto: SendEmailDto,
   ): Promise<SuccessResponseModel> {
     const { customer_email, token } = sendEmailDto;
