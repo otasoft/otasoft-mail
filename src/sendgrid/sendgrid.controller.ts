@@ -25,6 +25,13 @@ export class SendgridController {
     return await this.sendgridService.sendForgotPasswordEmail(sendEmailDto);
   }
 
+  @MessagePattern({ role: 'mail', cmd: 'send', type: 'set-new-password' })
+  async sendSetNewPasswordEmail(
+    sendEmailDto: SendEmailDto,
+  ): Promise<SuccessResponseModel> {
+    return await this.sendgridService.sendSetNewPasswordEmail(sendEmailDto);
+  }
+
   @MessagePattern({ role: 'mail', cmd: 'send', type: 'confirm-booking' })
   async sendConfirmBookingEmail(
     sendEmailDto: SendEmailDto,
