@@ -54,19 +54,19 @@ export class SendgridService {
     return { response: 'Confirmation sent' };
   }
 
-  async sendResetPasswordEmail(
+  async sendForgotPasswordEmail(
     sendEmailDto: SendEmailDto,
   ): Promise<SuccessResponseModel> {
     const { customer_email, token } = sendEmailDto;
-    const email_type = 'resetPassword';
+    const email_type = 'forgotPassword';
 
-    const resetPasswordEmailTemplate = emailTemplates.find(template => template.name === email_type);
+    const forgotPasswordEmailTemplate = emailTemplates.find(template => template.name === email_type);
 
     const message: ISendgridEmail = {
       to: customer_email,
       from: 'noreply@otasoft.org',
-      subject: resetPasswordEmailTemplate.subject,
-      text: resetPasswordEmailTemplate.text,
+      subject: forgotPasswordEmailTemplate.subject,
+      text: forgotPasswordEmailTemplate.text,
       html: `<a href="${this.configService.get(
         'SERVER_URL',
       )}/auth/reset/${token}">Click me to reset your password</a>`,
@@ -75,8 +75,8 @@ export class SendgridService {
     const resetPasswordEmail: IEmailObject = {
       customer_email,
       email_type,
-      subject: resetPasswordEmailTemplate.subject,
-      text: resetPasswordEmailTemplate.text,
+      subject: forgotPasswordEmailTemplate.subject,
+      text: forgotPasswordEmailTemplate.text,
     };
 
     try {
@@ -87,7 +87,40 @@ export class SendgridService {
       console.log(error);
     }
 
-    return { response: 'Reset password sent' };
+    return { response: 'Forgot password email sent' };
+  }
+
+  async sendSetNewPasswordEmail(
+    sendEmailDto: SendEmailDto,
+  ): Promise<SuccessResponseModel> {
+    const { customer_email } = sendEmailDto;
+    const email_type = 'setNewPassword';
+
+    const setNewPasswordEmailTemplate = emailTemplates.find(template => template.name === email_type);
+
+    const message: ISendgridEmail = {
+      to: customer_email,
+      from: 'noreply@otasoft.org',
+      subject: setNewPasswordEmailTemplate.subject,
+      text: setNewPasswordEmailTemplate.text,
+    };
+
+    const setNewPasswordEmail: IEmailObject = {
+      customer_email,
+      email_type,
+      subject: setNewPasswordEmailTemplate.subject,
+      text: setNewPasswordEmailTemplate.text,
+    };
+
+    try {
+      await sendgrid.send(message).then(() => {
+        this.commandBus.execute(new LogEmailToDbCommand(setNewPasswordEmail));
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    return { response: 'New password set' };
   }
 
   async sendConfirmBookingEmail(
