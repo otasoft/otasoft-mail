@@ -27,6 +27,6 @@ export const emailTemplates = [
     name: 'setNewPassword',
     subject: 'New password for your account has been set',
     text:
-      'Dear user, <br> This email is an automatic notification that your account password has be set.'
+      'Dear user, <br> This email is an automatic notification that your account password has be set.',
   },
 ];
