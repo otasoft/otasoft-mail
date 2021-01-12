@@ -25,7 +25,9 @@ export class SendgridService {
     const { customer_email, token } = sendEmailDto;
     const email_type = 'confirmCreateAccount';
 
-    const confirmAccountEmailTemplate = emailTemplates.find(template => template.name === email_type);
+    const confirmAccountEmailTemplate = emailTemplates.find(
+      (template) => template.name === email_type,
+    );
 
     const message: ISendgridEmail = {
       to: customer_email,
@@ -60,7 +62,9 @@ export class SendgridService {
     const { customer_email, token } = sendEmailDto;
     const email_type = 'forgotPassword';
 
-    const forgotPasswordEmailTemplate = emailTemplates.find(template => template.name === email_type);
+    const forgotPasswordEmailTemplate = emailTemplates.find(
+      (template) => template.name === email_type,
+    );
 
     const message: ISendgridEmail = {
       to: customer_email,
@@ -96,7 +100,9 @@ export class SendgridService {
     const { customer_email } = sendEmailDto;
     const email_type = 'setNewPassword';
 
-    const setNewPasswordEmailTemplate = emailTemplates.find(template => template.name === email_type);
+    const setNewPasswordEmailTemplate = emailTemplates.find(
+      (template) => template.name === email_type,
+    );
 
     const message: ISendgridEmail = {
       to: customer_email,
@@ -129,7 +135,9 @@ export class SendgridService {
     const { customer_email } = sendEmailDto;
     const email_type = 'confirmBooking';
 
-    const confirmBookingEmailTemplate = emailTemplates.find(template => template.name === email_type)
+    const confirmBookingEmailTemplate = emailTemplates.find(
+      (template) => template.name === email_type,
+    );
 
     // TODO
     // In the future, subject and text of this message should be dynamically generated.
@@ -165,7 +173,9 @@ export class SendgridService {
     const { customer_email } = sendEmailDto;
     const email_type = 'deleteAccount';
 
-    const deleteAccountEmailTemplate = emailTemplates.find(template => template.name === email_type)
+    const deleteAccountEmailTemplate = emailTemplates.find(
+      (template) => template.name === email_type,
+    );
 
     const message: ISendgridEmail = {
       to: customer_email,
